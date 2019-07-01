@@ -1,5 +1,6 @@
 
-# ETKFR https://zenodo.org/badge/DOI/10.5281/zenodo.3265078.svg
+# ETKFR 
+![Alternate image text](https://zenodo.org/badge/DOI/10.5281/zenodo.3265078.svg)
 
 ## An Ensemble transform Kalman filter with observation error covariance estimation
 ### Overview 
