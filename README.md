@@ -101,9 +101,11 @@ assimilations.
 ### Homogeneous
 `[RegR] = Homogeneous(R)`. Code to regularise the estimated observation error matrix by making
 it isotropic and homogeneous.
-1. *Inputs:*
-    1. `R` - matrix to be regularised.
-1. *Outputs:*
-    1. `RegR` - Regularised matrix.
+
+*Inputs:*
+1. `R` - matrix to be regularised.
+
+*Outputs:*
+1. `RegR` - Regularised matrix.
 
 
