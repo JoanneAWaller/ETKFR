@@ -52,24 +52,6 @@ Many of the steps in the proposed method are identical to the ETKF. Step 7, alon
 
 In practice the number of samples available will be limited and therefore the estimated observation error covariance matrix will not be full rank. In this case it may be necessary to apply some form of regularisation to the estimated matrix.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### References
 
 1. Desroziers, G., Berre, L., Chapnik, B. and Poli, P. (2005) Diagnosis of observation, background and analysis-
@@ -78,9 +60,6 @@ error statistics in observation space. Quarterly Journal of the Royal Meteorolog
 
 1. Evensen, G. (2003) The ensemble Kalman filter: Theoretical formulation and practical implementation.
 Ocean Dynamics, 53:343–367.
-
-1. Kassam, A. and Trefethen, L. (2005) Fourth-order time-stepping for stiff pdes. SIAM J. Sci. Computing,
-25:1214–1233.
 
 1. Stewart, L. M., Dance, S. L. and Nichols, N. K. (2013) Data assimilation with correlated observation
 errors: experiments with a 1-D shallow water model. Tellus A, 65.
