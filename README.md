@@ -1,8 +1,12 @@
 
-# ETKFR
+# ETKFR 
+![Alternate image text](https://zenodo.org/badge/DOI/10.5281/zenodo.3265078.svg)
 
 ## An Ensemble transform Kalman filter with observation error covariance estimation
 ### Overview 
+
+
+
 This repository includes software for the Ensemble transform Kalman filter with online time-dependent observation error covariance estimation developed in Waller (2013) and Waller et al. (2014). The method allows spatially correlated and time-dependent observation error to be diagnosed and incorporated in an ensemble data assimilation system. The method combines an ensemble transform Kalman filter with a method that uses statistical averages of background and analysis innovations (the so-called Desroziers diagnostic, henceforth denothed the DBCP diagnostic (Desroziers et al., 2005)) to provide an estimate of the observation error covariance matrix. 
 
 ### Background
