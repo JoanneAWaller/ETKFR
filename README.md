@@ -28,6 +28,63 @@ to calculate the analysis, are correct. However, the estimated observation error
 
 The ETKFR uses the ETKF and the DBCP diagnostic to estimate a possibly non-uniform time varying observation error covariance matrix. After the filter is initialised the filter is split into two stages. The first is a spin-up stage that runs for a predetermined number of steps, *N*<sup>s</sup>, and is an application of the standard ensemble transform Kalman filter. In the second stage at each assimilation step the observation error covariance matrix is updated using the DBCP diagnostic. We now present in detail the method that we have developed. Here the observation operator, **H**, is chosen to be linear, but the method could be extended to account for a non-linear observation operator ***H*** (e.g. Evensen (2003)).
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Initialisation** - Begin with an initial ensemble ***x***<sub>0</sub><sup>i</sup> for *i* = 1...*N* at time *t* = 0 that has an associated initial covariance matrix ***P***<sup>*f*</sup>. Also assume an initial estimate of the observation error covariance matrix ***R***<sub>0</sub>; it is possible that this could just consist of the instrument error.
+
+**Step 1** - The first step is to use the full non-linear model, ***M***<sub>n</sub>, to forecast each ensemble member, ***x***<sub>n+1</sub><sup>*f,i*</sup> = ***M***<sub>n</sub>(***x***<sub>n</sub><sup>*a,i*</sup>)
+
+**Step 2** - Calculate the ensemble mean, ***x***<sup>f</sup><sub>n</sub> = 1/N &Sigma;<sub>k=1</sub><sup>n</sup> ***x***<sub>n</sub><sup>*f,i*</sup> and covariance, ***P***<sub>n</sub><sup>*f*</sup> = ***X'***<sub>n</sub><sup>*f*</sup>(***X'***<sub>n</sub><sup>*f*</sup>)<sup>T</sup>, where ***X'***<sub>n</sub> is the matrix containing the ensemble perturbations.
+
+**Step 3** - Using the ensemble mean and the observations at time *t*<sub>n</sub>, calculate and store ***d***<sup>b</sup><sub>n</sub> = ***y***<sub>n</sub> − **H*****x***<sup>*f*</sup><sub>n</sub>. 
+
+**Step 4** - Update the ensemble mean using, ***x***<sup>a</sup><sub>n</sub> = ***x***<sup>*f*</sup><sub>n</sub> + ***K***<sub>n</sub>(***y***<sub>n</sub> − **H*****x***<sup>*f*</sup><sub>n</sub>), where ***K***<sub>n</sub> is the Kalman gain.
+
+**Step 5** - Calculate the analysis perturbations using ***X'***<sub>n</sub><sup>*a*</sup> = ***X'***<sub>n</sub><sup>*f*</sup>***&Upsi;***<sub>n</sub>, where ***&Upsi;***<sub>n</sub> is the symmetric square root of (***I*** − (***X'***<sub>n</sub><sup>*f*</sup>)<sup>T</sup>**H**<sup>T</sup>(**H*****X'***<sub>n</sub><sup>*f*</sup>(***X'***<sub>n</sub><sup>*f*</sup>)<sup>T</sup>**H**<sup>T</sup> + ***R***)**H*****X'***<sub>n</sub><sup>*f*</sup>). 
+
+**Step 6** - The analysis mean is then used to calculate the analysis innovations, ***d***<sup>a</sup><sub>n</sub> = ***y***<sub>n</sub> − **H*****x***<sup>*a*</sup><sub>n</sub>.
+
+
+**Step 7** - If *n* > *N*<sup>s</sup>, where Ns is the specified sample size, update ***R*** using ***R***<sub>n+1</sub> = 1/(*N*<sub>s</sub> − 1) &Sigma;<sub>k=n−*N*<sup>s</sup>+1</sub><sup>k = n</sup> ***d***<sup>a</sup><sub>k</sub>(***d***<sup>b</sup><sub>k</sub>)<sup>T</sup>. Then symmetrise the matrix, ***R***<sub>n+1</sub> = &frac12; (***R***<sub>n+1</sub> +***R***<sub>n+1</sub><sup>T</sup>). Otherwise keep ***R***<sub>n+1</sub> = ***R***<sub>0</sub>.
+
+Many of the steps in the proposed method are identical to the ETKF. Step 7, along with the storage of the background and analysis innovations in steps 3 and 6, are the additions to the ETKF that provide the estimate of the observation error covariance matrix.
+
+In practice the number of samples available will be limited and therefore the estimated observation error covariance matrix will not be full rank. In this case it may be necessary to apply some form of regularisation to the estimated matrix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### References
 
 1. Desroziers, G., Berre, L., Chapnik, B. and Poli, P. (2005) Diagnosis of observation, background and analysis-
